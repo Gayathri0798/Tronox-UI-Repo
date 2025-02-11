@@ -6,6 +6,11 @@
   "projectType": "library",
   "tags": [],
   "targets": {
+    "build": {
+      "options": {
+        "styles": ["libs/ui-components/src/styles.scss"]
+      }
+    },
     "lint": {
       "executor": "@nx/eslint:lint"
     }

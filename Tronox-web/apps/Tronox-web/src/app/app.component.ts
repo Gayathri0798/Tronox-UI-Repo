@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { NxWelcomeComponent } from './nx-welcome.component';
+import { UiLibraryComponent } from '@tronox-web/ui-library';
 
 @Component({
-  imports: [NxWelcomeComponent, RouterModule],
+  imports: [RouterModule, UiLibraryComponent],
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'Tronox-web';
@@ -15,4 +16,3 @@ export class AppComponent {
     alert('Button clicked!');
   }
 }
-
