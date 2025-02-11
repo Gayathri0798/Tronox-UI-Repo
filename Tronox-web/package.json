@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "license": "MIT",
   "type": "module",
-
   "scripts": {
+    "start:dev": "yarn nx run Tronox-web:serve",
     "wdio": "wdio run ./wdio.conf.ts",
     "wdiofirefox": "wdio run ./wdio.conf.firefox.js",
     "gegenerate-allure-report": "allure generate allure-results --clean",
