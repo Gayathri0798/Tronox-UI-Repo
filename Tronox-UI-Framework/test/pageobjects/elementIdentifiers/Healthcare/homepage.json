@@ -1,0 +1,3 @@
+{
+    "menubars": "//nav[@id='sidebar']/ul/li/a"
+}

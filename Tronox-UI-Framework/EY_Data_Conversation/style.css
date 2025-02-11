@@ -1,0 +1,561 @@
+:root{
+    --body-color : linear-gradient(45deg, #583701, #61600d);
+    --side-bar : linear-gradient(135deg, #b5c9c7, #768f8c);    
+    --container-box :  linear-gradient(135deg, #e0eafc, #cfdef3);    
+}
+
+/* Reset and basic styling */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    background-color: #393f00;
+    background: var(--body-color);
+    /* background: linear-gradient(90deg, #000636, #020624); */
+    /* background: linear-gradient(45deg, #6222CC,#6222CC); */
+    /* background: linear-gradient(45deg, #212336, #1f052a); */
+    /* background-color: #2F2F2F; */
+    /* background: linear-gradient(45deg, #0f2027, #203a43, #2c5364);  */
+    /* background: linear-gradient(45deg, #001f3f, #004d77); */
+    /* background: linear-gradient(45deg, #003a6c, #004d77, #005b96); */
+    /* background: linear-gradient(135deg, #003d6c, #005b96, #0083b0); */
+    /* background: linear-gradient(135deg, #003366, #006699); */
+    /* background: linear-gradient(135deg, #004d77, #0099cc); */
+
+
+    font-family: Arial, sans-serif;
+    /* background-color: #001f3f;; */
+    /* background-color: #18191A */
+}
+
+
+/* Main container styling */
+.container {
+    /* height: 96.5%; */
+    width: 100%;
+    display: flex;
+    /* justify-content: center; */
+    /* align-items: center; */
+    /* background: linear-gradient(45deg, #010758, #490d61); */
+    /* background: linear-gradient(45deg, #9d50bb, #6e48aa); */
+    /* background-image: linear-gradient(to right, #8e2de2, #4a00e0); */
+    /* background-image: linear-gradient(to right, #0f0c29, #302b63, #24243e); */
+    /* background-image: linear-gradient(to right, #870000, #190a05); */
+    /* background-image: linear-gradient(to right, #2c3e50, #4ca1af); */
+    /* background-image: linear-gradient(to right, #141e30, #243b55); */
+    /*background-image: linear-gradient(to right, #33001b, #ff0084);  */
+    /* background-image: linear-gradient(to right, #a8c0ff, #3f2b96); */
+    
+}
+
+
+
+/* Container styling */
+.side-bar {
+    padding: 10px 15px;           
+    margin-left: 20px;            
+    border-radius: 10px;           
+    border: 1px solid #ccc;       
+    background: var(--side-bar);    
+    white-space: nowrap; 
+    position: relative;
+    /* top: 15px;        */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Drop shadow for the sidebar */
+    overflow: auto;
+    height: 555px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    /* background-color: #18191A; */
+}
+
+
+
+
+
+.json-label, .js-label, .xml-label, .yaml-label, .others-label, .xlsx-label {
+    font-size: 13px;
+    color: #234361;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+}
+
+.js, .xml, .yaml, .xlsx, .Others{
+    margin-top: 10px;
+}
+
+
+
+/* Paragraph styling inside the sidebar */
+/* .To-Json-Schema, .JS-Object-To-Json-Schema, .To-Yaml, .To-XML, .js-to-json, .JS-Object-To-XML, .JS-Object-To-YAML,  .xml-to-json,.YAML-to-JSON, .XLSX-to-JSON  */
+.side-bar-link {
+    margin: 5px 0 5px 0;
+    font-size: 12px;
+    color: #007bb5;
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    border-radius: 3px;
+    transition: color 0.3s, background-color 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Drop shadow for the paragraph */
+    scroll-behavior: smooth;
+}
+
+/* Hover state for the paragraph */
+/* .To-Json-Schema:hover, .JS-Object-To-Json-Schema:hover,  .To-Yaml:hover, .To-XML:hover, .js-to-json:hover, .JS-Object-To-XML:hover, .JS-Object-To-YAML:hover, .xml-to-json:hover, .YAML-to-JSON:hover, .XLSX-to-JSON:hover  */
+.side-bar-link:hover{
+    color: #ffffff;
+    background-color: #007bb5;
+}
+
+/* Active state for the paragraph */
+/* .To-Json-Schema:active, .JS-Object-To-Json-Schema:active,  .To-Yaml:active, .To-XML:active, .js-to-json:active, .JS-Object-To-XML:active, .JS-Object-To-YAML:active, .xml-to-json:active, .YAML-to-JSON:active, .XLSX-to-JSON:active */
+.side-bar-link:active{
+    color: #ffffff;
+    background-color: #005f8d;
+}
+
+.side-bar-active {
+    color: #ffffff;
+    background-color: #005f8d;
+}
+
+/* Focus state to remove the default outline */
+/* .To-Json-Schema:focus, .JS-Object-To-Json-Schema:focus, .To-Yaml:focus, .To-XML:focus, .js-to-json:focus, .JS-Object-To-XML:focus, .JS-Object-To-YAML:focus, .xml-to-json:focus, .YAML-to-JSON:focus, .XLSX-to-JSON:focus  */
+.side-bar-link:focus {
+    outline: none;
+}
+
+/* Optional: Remove margin from the last paragraph */
+.side-bar p:last-child {
+    margin-bottom: 0;
+}
+
+
+.main-container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    flex-direction: column;
+}
+
+/* Header styling */
+.header {
+    color: white;
+    font-size: 1.05rem;
+    text-align: center;
+    padding: 1px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.7);
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3), 
+                 -2px -2px 5px rgba(255, 255, 255, 0.3);
+}
+
+
+
+/* Container box */
+.container-box {
+    width: 95%;
+    height: 84%;
+    margin: 15px 0;
+    display: flex;
+    gap: 20px;
+    padding: 10px;
+    background-color: #f0f0f0; /* Light gray background */
+    background: var(--container-box);
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Slight shadow for depth */
+}
+
+/* Main box inside container */
+.main-box {
+    flex: 1;
+    height: 100%;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Convert box inside container */
+.convert-box {
+    flex: 1;
+    height: 100%;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.1);
+    overflow-y: scroll;
+}
+
+.convert-box-features{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.download-container {
+    display: inline-block;
+    padding: 5px 10px;
+    background-color: green;
+    color: #fff;
+    border-radius: 10px;
+    font-size: 13px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    outline: none; /* Removes the default focus outline */
+}
+
+.download-container:hover {
+    background-color: darkgreen; /* Darken color on hover */
+}
+
+.download-container:active {
+    background-color: limegreen; /* Lighter color when clicked */
+    transform: scale(0.95); /* Slight shrink effect on click */
+}
+
+.download-container:focus {
+    outline: 2px solid yellow; /* Adds a yellow outline when focused */
+}
+
+.download-container-icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+.download-icon {
+    font-size: 18px;
+}
+
+#icon-copy {
+    vertical-align: middle;
+}
+
+.icon-copy.copied {
+    display: none;
+}
+
+
+
+
+
+
+.main-box-header, .convert-box-header {
+    text-align: center;
+    color: #0D3B66; /* Dark Blue */
+    font-size: 1.1rem;
+}
+/* .convert-box-header {
+    position: relative;
+    bottom: 10px;
+} */
+
+#response-textarea {
+    width: 100%;
+    height: 450px; /* Adjust this to fit your layout */
+    resize: none; /* Disable resizing */
+    background-color: #f2f2f2; /* Light gray background */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px; /* Space inside the textarea */
+    margin-top: 10px; /* Space above the textarea */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3); /* Shadow effect */
+    overflow: auto; /* Scrollbars appear when needed */
+}
+
+.decorated-button {
+    margin-top: 5px; 
+    background-color: #4CAF50; /* Green background */
+    color: white; /* White text */
+    padding: 0.35rem 0.9rem; /* Some padding */
+    text-align: center;
+    text-decoration: none; /* No underline */
+    display: inline-block;
+    font-size: 16px;
+    border: 2px solid #4CAF50; /* Green border */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect */
+    transition: background-color 0.3s ease; /* Smooth background color change */
+    position: relative; 
+   
+}
+
+/* For testing */
+.decorated-button:hover {
+    background-color: #45a049; /* Slightly darker green on hover */
+}
+
+.decorated-button:active {
+    background-color: #397d34; /* Even darker green on click */
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3); /* Reduced shadow on click */
+}
+
+
+
+
+#converted-schema-container {
+    width: 100%;
+    height: 450px; /* Adjust this height as needed */
+    margin-top: 9px;
+    background-color: #f9f9f9; /* Light background color */
+    border: 1px solid #ddd; /* Border for the container */
+    border-radius: 5px; /* Rounded corners */
+    padding: 10px; /* Padding inside the container */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    overflow: auto; /* Scrollbars appear if content overflows */
+    /*white-space: pre-wrap;*/ /* Preserve formatting of the JSON */
+    font-family: monospace; /* Use a monospaced font for better readability */
+}
+
+
+.clear-response {
+    margin-top: 1px; /* Spacing above the button */
+    padding: 0.26rem 0.6rem; /* Adjust padding for better size */
+    background-color: #007BFF; /* Primary blue background color */
+    color: white; /* White text for contrast */
+    border: 1px solid #007BFF; /* Border matches background */
+    cursor: pointer; /* Pointer cursor on hover */
+    display: inline-block;
+    line-height: 1.5rem; /* Vertically center text */
+    border-radius: 6px; /* Rounded corners */
+    transition: all 0.3s ease; /* Smooth transition */
+}
+
+
+.clear-schema {
+    margin-left: 10px; /* Add some spacing between buttons */
+    margin-top: 5px; 
+    padding: 0.26rem 0.6rem; /* Adjust padding for better size */
+    background-color: #007BFF; /* Primary blue background color */
+    color: white; /* White text for contrast */
+    border: 1px solid #007BFF; /* Border matches background */
+    cursor: pointer; /* Pointer cursor on hover */
+    display: inline-block;
+    line-height: 1.5rem;
+    border-radius: 6px;
+    transition: all 0.3s ease; /* Smooth transition */
+    position: relative;
+    bottom: 1.3px;
+}
+
+.clear-response:hover, .clear-schema:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+    border-color: #0056b3; /* Match border to background on hover */
+}
+
+.clear-response:active ,.clear-schema:active {
+    transform: scale(1.05); /* Slightly enlarge button on click */
+    background-color: #004080; /* Even darker blue for active state */
+    border-color: #003366; /* Match border to background on active state */
+}
+
+.icon-upload-container {
+    padding: 8px 12px;
+    background: linear-gradient(45deg, rgb(83, 186, 83), rgb(117, 117, 167));
+    border-radius: 5px;
+    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.icon-upload-container i {
+    margin-right: 8px;
+}
+
+.icon-upload-container:hover {
+    background: linear-gradient(45deg, rgb(72, 172, 72), rgb(99, 99, 160));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.icon-upload-container:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Hide the default file input */
+.icon-upload-container input[type="file"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.00000000001;
+    cursor: pointer;
+}
+
+
+.icon-copy-container {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: 5rem; /* Adjust the size as needed */
+    height: 2rem; /* Adjust the size as needed */
+    background-color: #5784f5; /* Blue background */
+    background-color: #2F2F2F; /* Blue background */
+    color: #fff; /* White text color */
+    border-radius: 0.5rem; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 0.8rem; /* Adjust font size for icon */
+    transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transitions */
+    text-align: center; /* Center text/icon */
+    line-height: 2rem; /* Center icon vertically */
+    /* margin-bottom: 10px; */
+}
+
+.icon-copy-container label {
+    margin-left: 5px;
+}
+
+
+
+/* Hover and active states */
+.icon-copy-container:hover {
+    background-color: #4a6dd4; /* Slightly darker blue on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Slightly larger shadow on hover */
+}
+
+.icon-copy-container:active {
+    background-color: #3c56a6; /* Even darker blue on click */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow effect on click */
+}
+
+
+
+
+
+
+
+.invalid-container {
+    position: absolute;
+    z-index: 1;
+    left: 41%;
+    top: -60px;
+    display: none;
+}
+
+.invalid-container-inner {
+    position: relative;
+    height: 60px;
+    width: 300px;
+    background-color: #ffffff;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    animation: timeout 0.5s ease 0.5s 1 forwards;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Adjusted shadow color */
+    overflow: hidden;
+}
+
+@keyframes timeout {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(95px);
+        box-shadow: 0 0 5px #c08686;
+    }
+}
+
+.invalid-container-inner::after {
+    content: "";
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background-color: red;
+    bottom: 0;
+    z-index: 1;
+    animation: travel-and-disappear 10s ease 0.5s 1 forwards;
+}
+
+
+@keyframes travel-and-disappear {
+    0% {
+        transform: translateX(0%);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-100%);
+        opacity: 1;
+    }
+}
+
+
+.invalid-container.remove-invalid-container{
+    animation: remove-invalid-container 0.5s ease 0.5s 1 forwards;
+}
+
+@keyframes remove-invalid-container {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-100%);
+        display: none;
+    }
+}
+
+
+
+
+
+
+.invalid-container .invalid-container-first{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.invalid-container .fa-square-xmark{
+    color: #B02B2B;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.invalid-container .fa-square-xmark:hover{
+    transform: scale(1.05);
+}
+.invalid-container .fa-square-xmark:active{
+    transform: scale(1.2);
+    color: red;
+}
+
+
+
+.invalid-container .fas{
+    color: #B02B2B;
+    font-size: 25px;
+}
+.invalid-container .invalid-text{
+    color: #B02B2B;
+    font-size: 16px;
+}
+
+

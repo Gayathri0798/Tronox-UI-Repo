@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EY Conversion Tool</title>
+    <link rel="stylesheet" href="headline.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script> -->  <!--EDITOR-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jsonlint/1.6.0/jsonlint.min.js" integrity="sha512-6qbnCNQe7wVcBDvhNJT6lZsbDKHCQQBk7yOBQg4s/9GG812CknK0EEIqG2IS10XuNxIQNWjMJd6VLwwezICz6w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> <!-- jsonlint-->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/xmllint/1.0.0/xmllint.min.js"></script> -->
+</head>
+<body>
+
+    <div class="invalid-container " id="invalid-container">
+        <div class="invalid-container-inner">
+            <div class="invalid-container-first">
+                <i class="fas fa-info-circle"></i>
+                <p class="invalid-text"></p>
+            </div>
+            <div class="invalid-container-second">
+                <i class="fa-solid fa-square-xmark"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="headline-container-header">
+        <div class="headline-container">
+            <div class="image-container">
+                <div class="image"></div>
+            </div>
+            <div class="text-container">
+                <h1 class="headline">DATA CONVERSION TOOL</h1>
+                <h2 class="sub-headline"><div class="text-convertor">CONVERSION TOOL</div></h2>
+            </div>
+        </div>
+    </div>
+    
+    <div class="container">
+
+        
+        <div class="main-container">
+            <!-- <div class="header">
+                <h1 class="header-text">Response to Schema <div class="text-convertor">Convertor</div></h1>
+            </div> -->
+            <div class="container-box">
+                <div class="main-box">
+                    <p class="main-box-header"> </p>
+                    <span class="icon-upload-container">
+                        <i class="fa-solid fa-cloud-arrow-up icon-upload"></i>Upload File
+                        <input type="file" id="fileInput">
+                    </span>
+                    <!-- <textarea id="response-textarea" name="editor1" placeholder="Enter your response here..."></textarea> --> <!--EDITOR-->
+    
+                    <textarea id="response-textarea"  placeholder="Enter your response here..."></textarea>
+                    <div class="clear-response-container">
+                        <button class="clear-response">Clear Request</button>
+                    </div>
+                </div>
+
+                <div class="side-bar">
+                    <div class="json">
+                        <label  class="json-label">JSON</label>
+                        <div class="from-json">
+                            <p class="To-Json-Schema side-bar-link" id="To-Json-Schema">To Json Schema</p> <!-- Please dont change the inner text-->
+                            <p class="To-Yaml side-bar-link" id="to-Yaml">to Yaml</p> <!-- Please dont change the inner text-->
+                            <p class="To-XML side-bar-link" id="to-XML">to XML</p> <!-- Please dont change the inner text-->
+                            <p class="To-Js side-bar-link" id="to-Js">To JS Object</p> <!-- Please dont change the inner text-->
+                        </div>
+                    </div>
+                    <div class="js">
+                        <label  class="js-label">JavaScript</label>
+                        <div>
+                            <p class="js-to-json side-bar-link" id="js-to-json">To Json</p> <!-- Please dont change the inner text-->
+                            <p class="JS-Object-To-Json-Schema side-bar-link" id="JS-Object-To-Json-Schema">To Json Schema</p> <!-- Please dont change the inner text-->
+                            <p class="JS-Object-To-XML side-bar-link" id="JS-Object-To-XML">to XML</p> <!-- Please dont change the inner text-->
+                            <p class="JS-Object-To-YAML side-bar-link" id="JS-Object-To-YAML">to Yaml</p> <!-- Please dont change the inner text-->
+                        </div>
+                    </div>
+                    <div class="xml">
+                        <label  class="xml-label">XML</label>
+                        <div>
+                            <p class="xml-to-json side-bar-link" id="XML-to-JSON">XML to JSON</p> <!-- Please dont change the inner text-->
+                            <p class="XML-to-YAML side-bar-link" id="XML-to-YAML">XML to YAML</p> <!-- Please dont change the inner text-->
+                        </div>
+                    </div>
+                    <div class="yaml">
+                        <label  class="yaml-label">YAML</label>
+                        <div>
+                            <p class="YAML-to-JSON side-bar-link" id="YAML-to-JSON">YAML to JSON</p> <!-- Please dont change the inner text-->
+                            <p class="YAML-to-XML side-bar-link" id="YAML-to-XML">YAML to XML</p> <!-- Please dont change the inner text-->
+                        </div>
+                    </div>
+                    <div class="xlsx">
+                        <label  class="xlsx-label">XLSX</label>
+                        <div>
+                            <p class="XLSX-to-JSON side-bar-link" id="XLSX-to-JSON">XLSX to JSON</p> <!-- Please dont change the inner text-->
+                        </div>
+                    </div>
+                    <!-- Additional paragraphs can be added here if needed -->
+                </div>
+
+                <div class="convert-box">
+                    
+                    <p class="convert-box-header"></p>
+                    <div class="convert-box-features">
+                        <span class="icon-copy-container">
+                            <i class="fa fa-clone icon-copy copy"></i>
+                            <i class="fa-solid fa-check icon-copy copied"></i>
+                            <label  id="icon-copy">Copy</label>
+                        </span>
+                        <span class="download-container">
+                            <span class="download-container-icon">
+                                <i class="fa-solid fa-download download-icon"></i>
+                            </span>
+                            <label  id="icon-copy">Download</label>
+                        </span>
+                    </div>
+                    <div id="converted-schema-container">
+                        <!-- Converted schema will be displayed here -->
+                    </div>
+                    <button class="decorated-button">Convert</button>
+                    <button class="clear-schema">Clear Response</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xmllint@0.1.1/xmllint.min.js"></script>
+
+    <!-- <script>
+        CKEDITOR.replace( 'editor1' );   
+    </script> -->
+</body>
+</html>

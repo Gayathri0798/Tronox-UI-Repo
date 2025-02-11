@@ -1,0 +1,27 @@
+{  
+    "validusername":
+    {   
+    "username": "MBCFBBEMP010001",
+    "password": "e472bfa010580cb46961be1d64da9f6d|2d02922aabd68e8bb2a3971c75294d5a",
+    "originalpassword": "2021112826",
+    "checkTitle": "Chit Fund Application | Dashboard"  
+    },
+    "Invalid":
+    {   
+    "username": "admin",
+    "password": "staff@12",
+    "errormsg": "User Name and/or Password Wrong"  
+    },
+    "forgotname":
+    {   
+    "username": "",
+    "password": "staff@12",
+    "errormsg1": "ENTER THE USER NAME"  
+    },
+    "forgotpassword":
+    {   
+    "username": "staff",
+    "password": "",
+    "errormsg2": "ENTER THE PASSWORD"  
+    }
+}

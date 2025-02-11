@@ -1,0 +1,74 @@
+**Python:**
+
+```python
+num1 = int(input("Enter the first number: "))
+num2 = int(input("Enter the second number: "))
+
+sum = num1 + num2
+print("The sum of the two numbers is:", sum)
+```
+
+**C++:**
+
+```c++
+#include <iostream>
+
+using namespace std;
+
+int main() {
+  int num1, num2;
+  cout << "Enter the first number: ";
+  cin >> num1;
+  cout << "Enter the second number: ";
+  cin >> num2;
+
+  int sum = num1 + num2;
+  cout << "The sum of the two numbers is: " << sum << endl;
+
+  return 0;
+}
+```
+
+**Java:**
+
+```java
+import java.util.Scanner;
+
+public class AddNumbers {
+
+  public static void main(String[] args) {
+    Scanner scanner = new Scanner(System.in);
+
+    System.out.println("Enter the first number: ");
+    int num1 = scanner.nextInt();
+    System.out.println("Enter the second number: ");
+    int num2 = scanner.nextInt();
+
+    int sum = num1 + num2;
+    System.out.println("The sum of the two numbers is: " + sum);
+  }
+}
+```
+
+**C#:**
+
+```csharp
+using System;
+
+namespace AddNumbers
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Enter the first number: ");
+            int num1 = int.Parse(Console.ReadLine());
+            Console.WriteLine("Enter the second number: ");
+            int num2 = int.Parse(Console.ReadLine());
+
+            int sum = num1 + num2;
+            Console.WriteLine("The sum of the two numbers is: " + sum);
+        }
+    }
+}
+```

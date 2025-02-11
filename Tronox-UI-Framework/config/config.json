@@ -1,0 +1,31 @@
+{
+    "hospitalEnv": {
+        "baseUrl": "https://shriramsoftwares.com/hospital/",
+        "appName": "Healthcare"
+    },
+    "financeEnv": {
+        "baseUrl": "https://shriramsoftwares.com/chit_fund/index.php/login",
+        "appName": "chitfund",
+        "appNamespec": "login.e2e"
+    }
+    ,
+    "flipkart": {
+        "baseUrl": "https://www.flipkart.com/",
+        "appName": "flipkart"
+    },
+    "Jamaica": {
+        "baseUrl": "https://flstg.discoverflow.lla.digital/jamaica",
+        "appName": "Jamaica",
+        "appNamespec": "Jamaica.e2e"
+    },
+    "Element": {
+        "baseUrl": "https://testautomationpractice.blogspot.com/",
+        "appName": "Element",
+        "appNamespec": "elements.e2e"
+    },"Tronox": {
+        "baseUrl": "https://tronox.okta.com/",
+        "appName": "Tronox",
+        "appNamespec": "TronoxDTS.e2e"
+    }
+    
+}

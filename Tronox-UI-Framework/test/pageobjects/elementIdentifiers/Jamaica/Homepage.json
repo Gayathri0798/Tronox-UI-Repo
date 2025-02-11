@@ -1,0 +1,6 @@
+{
+    "menu1":"//div[@class='main-menu__top-bar']//div//div//div//div/mat-button-toggle-group/mat-button-toggle/button",
+    "menu2":"//div[@class='main-menu__horizontal']//div[1]/ul/li",
+    "menu3":"//div[@class='label-button']/li/a",
+    "menu4":"//*[@id='icon_shortcuts_52']/div[1]/div[1]//div[1]/a/div/p"
+}

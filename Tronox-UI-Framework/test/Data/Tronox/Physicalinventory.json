@@ -1,0 +1,90 @@
+{
+    "logincred":{
+        "username":"rahul.jahagirdar@tronox.com",
+        "password":"2s@10EC032",
+        "submitbtn":"Submit",
+        "code":"545220"
+    },
+    "Plantnumber": "3120",
+    "Material": "P041F-640",
+    "Batch": "BBA045261",
+    "Storagelocation": "FG00",
+    "createdeliverydata":{
+        "OrderType": "ZDOR",
+        "SalesOrg": "7200",
+        "Disturbitionchannel": "10",
+        "Division": "10",
+        "SoldToParty": "21000382",
+        "Shiptoparty": "21000382",
+        "referencedate": "29.01.2025",
+        "customerreference": "012/IMCTR/U1&2/24-25",
+        "reqdeliverydate": "05.02.2025",
+        "materialdata": "ZS-NO-PRE-CHA-80",
+        "materialquantity": "1",
+        "spaecprodId": "20BI",
+        "OrderNumber": "3000170",
+        "Shippingpoint": "7600"
+    },
+    "Kittydetailsdata":{
+        "materialvaluekitty": "2050437",
+        "quantity": "1",
+        "momenttypevalue": "262",
+        "planttype": "3120",
+        "storagelocation": "MR01",
+        "order": "4500015567"
+    },
+    "F110dataset":{
+        "Rundatedata": "20.12.2024",
+        "identificationdata": "PTEST",
+        "Vendourdata": "51002895",
+        "companycodedata": "7100",
+        "Ficialyear": "2024"
+    },
+    "FB50JournalEnteries":{
+        "documentdate": "12.12.2024",
+        "postingdate": "13.12.2024",
+        "referencenumber": "TESTK",
+        "GLaccount": "500947",
+        "amount": "1000",
+        "Taxcode": "I1",
+        "costcentre": "71323045",
+        "GLrow2": "169999",
+        "financiallyear": "2024"
+    },
+    "KO88ordersetellement":{
+        "ordernumber": "30030889",
+        "setellementperiod": "10",
+        "financialyear": "2024",
+        "controling": "1000",
+        "Documentnumber": "100074303",
+        "companycode": "7300",
+        "plantnumber": "7302"
+    },
+    "COR2data":{
+        "plantnumber": "7121",
+        "scheduledate": "27.12.2024",
+        "processorder": "90002721"
+    },
+    "MTSNOftification":{
+        "NotificationType": "M1",
+        "NotificationDiscription": "Notification Test",
+        "ActType": "002",
+        "FunctionalLocation": "CAT-NPI-018-FAC",
+        "Equipment": "10002265"
+    },
+    "STPorderdetails":{
+        "supplierNo": "51003921",
+        "purchaseOrganization": "3000",
+        "purchaseGroup": "103",
+        "componyCode": "3100",
+        "MaterialNumber": "2050437",
+        "PlantCode": "3120",
+        "setQuantity": "10" ,
+        "MovementType":"201",
+        "RC_Plant": "3120" ,
+        "CostCenterNo": "31111000",
+        "RC_MaterialNO": "2050437"  ,
+        "RC_Quantity": "10",
+        "RC_UnitType": "EA"
+    }   
+}

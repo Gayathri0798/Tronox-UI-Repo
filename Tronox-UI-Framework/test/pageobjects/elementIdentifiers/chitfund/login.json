@@ -1,0 +1,14 @@
+{
+    "carwaleloginbutton": "//div[4]//*[(name()='svg' and @fill='currentcolor')]",
+    "logininput": "//input[@id='user_name']",
+    "loginpassword": "//input[@id ='password']",
+    "loginbutton": "//button[@type='submit']",
+    "errormessage": "//label[@class='text-center error']",
+    "logoutdropdown": "//span[@class='ml-2 d-none d-lg-block']",
+    "logoutbtn": "//div/a[@class='dropdown-item sign_out']",
+    "errormeggaseusername": "//div/span[@id='err_user_name']",
+    "errormeggasepassword": "//div/span[@id='err_pwd']",
+    "mastercustomertable": "//*[@id='DataTables_Table_0']/tbody/tr/td",
+    "menubarlocation": "//*[@id='headerMenuCollapse']/div/div/div[2]/ul/li[2]/a",
+    "customeroption": "//*[@id='headerMenuCollapse']/div/div/div[2]/ul/li[2]/div/a[1]"
+}

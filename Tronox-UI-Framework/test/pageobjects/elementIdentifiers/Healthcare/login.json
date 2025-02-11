@@ -1,0 +1,10 @@
+{
+    "logininput": "//input[@id='user_name']",
+    "loginpassword": "//input[@id ='password']",
+    "loginbutton": "//button[@type='submit']",
+    "errormessage": "//div/h6[@class='font-weight-light err text-danger']",
+    "logoutdropdown": "//ul/li[@class='nav-item nav-profile dropdown']",
+    "logoutbtn": "//div[@class='dropdown-menu dropdown-menu-right navbar-dropdown show']",
+    "errormeggaseusername": "//div/span[@id='err_user_name']",
+    "errormeggasepassword": "//div/span[@id='err_password']"
+}

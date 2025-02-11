@@ -1,0 +1,30 @@
+{  
+    "validusername":
+    {   
+    "username": "staff",
+    "password": "staff@123",
+    "checkTitle": "OPD Management" 
+    },
+    "Invalid":
+    {   
+    "username": "admin",
+    "password": "staff@12",
+    "errormsg": "Invalid userid or password"  
+    },
+    "forgotname":
+    {   
+    "username": "",
+    "password": "staff@12",
+    "errormsg1": "ENTER THE USER NAME"  
+    },
+    "forgotpassword":
+    {   
+    "username": "staff",
+    "password": "",
+    "errormsg2": "ENTER THE PASSWORD"  
+    },
+    "menlist":
+    {
+        "menubars": ["Dashboard","Patient Details","OPD Details","IPD Details","OT Details","Receipts","Discharge Summary Crad","Discharge Card","Letter Head Working"]
+    }
+}

@@ -1,0 +1,161 @@
+:root{
+    --header-color : linear-gradient(45deg, #581201, #57610df6);
+    /* --header-color : linear-gradient(90deg, #000636, #020624); */
+}
+
+/* Header Styling */
+.headline-container-header {
+    width: 100%;
+    height: 14%;
+    background: var(--header-color);
+    /* background: linear-gradient(45deg, #6222CC,#6222CC); */
+    /* background: linear-gradient(45deg, #212336, #1f052a); */
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid transparent;
+    border-radius: 8px; 
+    position: relative; 
+
+    /* Advanced border effect with gradient */
+    /* border-image: linear-gradient(45deg, #003a6c, #005b96); */
+    border-image-slice: 1;
+
+    /* Enhanced shadow effect */
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.4), 
+                inset 0px 0px 15px rgba(255, 255, 255, 0.2);
+
+    /* Transition for smooth hover effect */
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    /* background-color: #2F2F2F; */
+    /* background-color: #001f3f; */
+    /* background-color: #18191A; */
+}
+
+/* Pseudo-element for additional visual effect */
+.headline-container-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.1), rgba(255, 255, 255, 0.1));
+    border-radius: 8px; /* Match the border-radius */
+    z-index: 1; /* Ensure it's behind the content */
+    pointer-events: none; /* Allow clicks to pass through */
+    opacity: 0.3; /* Slight transparency for a subtle effect */
+}
+
+/* Hover effect for interactive design */
+.headline-container-header:hover {
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5), 
+                inset 0px 0px 20px rgba(255, 255, 255, 0.3);
+    transform: translateY(-3px); /* Slight lift effect on hover */
+}
+
+/* Optional: Add a glow effect to the text */
+.headline-container-header h1 {
+    color: #fff; /* Ensure text is readable */
+    text-shadow: 0px 0px 5px rgba(255, 255, 255, 0.7); /* Subtle glow effect */
+}
+
+
+
+.headline-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-right: 195px;
+}
+
+
+/* Image container */
+.image-container {
+    flex: 0 0 auto;
+    padding: 10px;
+    box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.8); /* Slightly larger and softer shadow for better visibility */
+    display: flex;
+    align-items: center; /* Center items vertically */
+    justify-content: center; /* Center items horizontally */
+    background-color: #2d3f00; /* Matching the background color to ensure good contrast */
+    border-radius: 8px; /* Optional: adds rounded corners for a softer look */
+    margin-left: 35px;
+    /* background: linear-gradient(90deg, #000636, #000109); */
+}
+
+/* Image styling */
+.image {
+    width: 150px; /* Adjust the size according to your logo */
+    height: 40px;
+    background-color: #fff;
+    border-radius: 8px; /* Optional: adds rounded corners to the image */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3); /* Slightly larger shadow for better separation */
+    background-image: url("EYlogo.png");
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+
+.text-container {
+    flex: 1;
+    text-align: center;
+    color: white;
+    padding: 0 10px; /* Added padding for spacing */
+}
+
+.headline {
+    font-size: 2rem;
+    margin: 0;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.sub-headline {
+    font-size: 1.2rem;
+    margin: 0;
+    font-weight: normal;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* 3D effect for header text */
+.header-text {
+    font-size: 2em;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 0 #000, 4px 4px 0 #333, 6px 6px 0 #555;
+}
+
+/* Styling the text-convertor */
+.text-convertor {
+    display: inline-block;
+    color: #ffde59;
+    background: #282c34;
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease-in-out;
+}
+
+.text-convertor:hover {
+    background: #ffde59;
+    color: #282c34;
+    transform: scale(1.05);
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .headline-container-header {
+        height: 14%;
+    }
+    .headline {
+        font-size: 1.8rem;
+    }
+    .sub-headline {
+        font-size: 1rem;
+    } 
+    .text-convertor{
+        padding: 4.5px 9px;
+    }
+}
