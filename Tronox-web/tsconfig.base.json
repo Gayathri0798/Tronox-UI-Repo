@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@tronox-web/ui-library": ["libs/shared/ui-library/src/index.ts"]
+      "@tronox-web/ui-library": ["libs/shared/ui-library/src/index.ts"],
+      "@tronox-web/util-library": ["libs/shared/util-library/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NxWelcomeComponent } from './nx-welcome.component';
-import { UiLibraryComponent } from '@tronox-web/ui-library';
+import { DrawerLayoutComponent } from '@tronox-web/ui-library';
 
 @Component({
-  imports: [RouterModule, UiLibraryComponent],
+  imports: [RouterModule, DrawerLayoutComponent],
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',

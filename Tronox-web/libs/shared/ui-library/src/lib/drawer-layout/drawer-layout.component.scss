@@ -1,0 +1,63 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.full-page-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+}
+
+.drawer {
+  width: 250px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.drawer-content {
+  flex-grow: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.content-area {
+  flex-grow: 1;
+  overflow-y: auto; /* Scroll only if needed */
+  padding: 16px;
+}
+
+.left-drawer {
+  background-color: white !important;
+  border: 0.1px solid rgb(218, 210, 210);
+}
+
+// ::ng-deep .mat-toolbar,
+// .left-drawer,
+// .mat-toolbar-single-row {
+//   font-weight: bold !important;
+//   font-size: 2.2rem !important;
+//   color: darkblue !important;
+// }
+
+.right-drawer {
+  background-color: white !important;
+  border: 0.1px solid rgb(218, 210, 210);
+}
+
+.grid-container {
+  padding: 16px; /* Adds space around the grid */
+  box-sizing: border-box; /* Ensures padding doesn’t affect layout */
+}

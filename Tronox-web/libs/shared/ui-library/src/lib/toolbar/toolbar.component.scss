@@ -1,0 +1,35 @@
+mat-toolbar {
+  background-color: rgb(252, 254, 255);
+  box-shadow: 0 0 0 0.5px black;
+  display: flex;
+  align-items: center;
+}
+.spacer {
+  flex: 1;
+}
+.logo {
+  height: 40px;
+}
+.search-box {
+  width: 400px; /* Increased width */
+}
+
+.search-box .mat-mdc-text-field-wrapper {
+  height: 28px !important; /* Reduced height */
+  border-radius: 20px !important; /* Keeps edges rounded */
+}
+
+.search-box input {
+  padding: 2px 12px !important; /* Adjust padding for better alignment */
+  font-size: 14px; /* Optional: Adjust font size for better fit */
+}
+
+mat-form-field {
+  margin-top: 19px;
+}
+
+img {
+  height: 82px;
+  width: 176px;
+  margin-bottom: 18px;
+}

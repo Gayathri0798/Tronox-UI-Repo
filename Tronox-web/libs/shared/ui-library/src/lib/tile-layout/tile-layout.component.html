@@ -1,0 +1,7 @@
+<mat-grid-list cols="3" rowHeight="100px" gutterSize="16px">
+  @for(tile of tiles; track tile.id){
+  <mat-grid-tile class="tile">
+    <lib-tile-view [tile]="tile"> </lib-tile-view>
+  </mat-grid-tile>
+  }
+</mat-grid-list>

@@ -1,0 +1,23 @@
+<h2 mat-dialog-title>Upload an Excel File</h2>
+<mat-dialog-content>
+  <input type="file" accept=".xls,.xlsx" (change)="onFileSelected($event)" />
+  <div *ngIf="fileName" class="file-info">
+    <p><strong>File:</strong> {{ fileName }}</p>
+    <a *ngIf="fileUrl" [href]="fileUrl" download="{{ fileName }}"
+      >📥 Download</a
+    >
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button
+    mat-button
+    color="primary"
+    (click)="runScript()"
+    [disabled]="!fileUploaded || isProcessing"
+  >
+    ▶ Run Script
+  </button>
+
+  <mat-spinner *ngIf="isProcessing" diameter="24"></mat-spinner>
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

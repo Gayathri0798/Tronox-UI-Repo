@@ -18,7 +18,13 @@
         "assets": [
           {
             "glob": "**/*",
-            "input": "apps/Tronox-web/public"
+            "input": "apps/Tronox-web/public",
+            "output": "global"
+          },
+          {
+            "glob": "**/*",
+            "input": "apps/Tronox-web/src/assets",
+            "output": "assets"
           }
         ],
         "styles": [

@@ -1,0 +1,17 @@
+<mat-drawer-container class="full-page-container">
+  <!-- Left Drawer -->
+  <mat-drawer mode="side" [opened]="isDrawerOpen" class="drawer">
+    <lib-toolbar [className]="'left-drawer'" [imageSrc]="'/tronox_logo.png'">
+      ></lib-toolbar
+    >
+    <div class="drawer-content">Drawer content goes here</div>
+  </mat-drawer>
+
+  <!-- Main Content -->
+  <mat-drawer-content class="main-content">
+    <lib-toolbar [className]="'right-drawer'" [showSearch]="true"></lib-toolbar>
+    <div class="grid-container">
+      <lib-tile-layout [tiles]="tiles"></lib-tile-layout>
+    </div>
+  </mat-drawer-content>
+</mat-drawer-container>
