@@ -81,7 +81,7 @@ app.post('/run-test', (req, res) => {
 });
 
 // Load tiles from JSON file
-app.get('/api/tiles', verifyToken, (req, res) => {
+app.get('/api/tiles', (req, res) => {
   try {
     const tileData = JSON.parse(fs.readFileSync('./Tronox-UI-Framework/config/config.json', 'utf-8'));
     res.json(tileData);
@@ -208,92 +208,102 @@ app.post("/realtime-testcase-exec", verifyToken, upload.single("file"), (req, re
   res.setHeader("Transfer-Encoding", "chunked");
 
   if (!req.file) {
-      res.write("Error: No file uploaded\n");
-      return res.end();
+    res.write("Error: No file uploaded\n");
+    return res.end();
+  }
+
+  const { testName } = req.body; // Get the test name from the frontend
+
+  if (!testName) {
+    res.write("Error: No test name provided\n");
+    return res.end();
   }
 
   try {
-      res.write("Processing uploaded file...\n");
+    res.write("Processing uploaded file...\n");
 
-      const workbook = xlsx.readFile(req.file.path);
-      const sheetName = workbook.SheetNames[0];
-      const sheet = workbook.Sheets[sheetName];
-      
-      const mergedCells = sheet["!merges"] || [];
-      res.write(`Found ${mergedCells.length} merged cells.\n`);
+    const workbook = xlsx.readFile(req.file.path);
+    const sheetName = workbook.SheetNames[0];
+    const sheet = workbook.Sheets[sheetName];
 
-      const jsonData = xlsx.utils.sheet_to_json(sheet, { header: 1, defval: null });
-      const result = {};
-      const processedColumns = new Set();
+    const mergedCells = sheet["!merges"] || [];
+    res.write(`Found ${mergedCells.length} merged cells.\n`);
 
-      mergedCells.forEach((merge) => {
-          const parentCell = jsonData[merge.s.r][merge.s.c];
-          const childData = {};
-          var r = "";
-          for (let col = merge.s.c; col <= merge.e.c; col++) {
-              const key = jsonData[merge.s.r + 1]?.[col];
-              const value = jsonData[merge.s.r + 2]?.[col];
-              r= value;
-              if (key) {
-                  childData[key] = value !== undefined ? value : null;
-                  processedColumns.add(col);
-              }
-          }
-          if(isEmptyObject(childData)) {
-            result[parentCell] = r;
+    const jsonData = xlsx.utils.sheet_to_json(sheet, { header: 1, defval: null });
+    const result = {};
+    const processedColumns = new Set();
+
+    mergedCells.forEach((merge) => {
+      const parentCell = jsonData[merge.s.r][merge.s.c];
+      const childData = {};
+      let r = "";
+
+      for (let col = merge.s.c; col <= merge.e.c; col++) {
+        const key = jsonData[merge.s.r + 1]?.[col];
+        const value = jsonData[merge.s.r + 2]?.[col];
+        r = value;
+
+        if (key) {
+          childData[key] = value !== undefined ? value : null;
+          processedColumns.add(col);
         }
-        else {
-            result[parentCell] = childData;
-        }
-
-          //result[parentCell] = Object.keys(childData).length ? childData : null;
-      });
-
-      if (mergedCells.length === 0) {
-          const headers = jsonData[0] || [];
-          const values = jsonData[1] || [];
-          headers.forEach((header, index) => {
-              if (header && !processedColumns.has(index)) {
-                  result[header] = values[index] ?? null;
-              }
-          });
       }
 
-      fs.unlinkSync(req.file.path);
-      res.write("File processing completed.\n");
-     
-      const jsonString = JSON.stringify(result, null, 2);
-     const filePath = 'C:\\Tronox-UI-Repo\\Tronox-UI-Framework\\test\\Data\\Tronox\\Physicalinventory.json';
-      //const filePath = "C:\\tronox\\Tronox-UI-Repo1\\Tronox-UI-Framework\\test\\Data\\Tronox\\Physicalinventory.json";
+      result[parentCell] = isEmptyObject(childData) ? r : childData;
+    });
+
+    if (mergedCells.length === 0) {
+      const headers = jsonData[0] || [];
+      const values = jsonData[1] || [];
+      headers.forEach((header, index) => {
+        if (header && !processedColumns.has(index)) {
+          result[header] = values[index] ?? null;
+        }
+      });
+    }
+
+    fs.unlinkSync(req.file.path);
+    res.write("File processing completed.\n");
+
+    const jsonString = JSON.stringify(result, null, 2);
+    const filePath =
+      "C:\\Tronox-UI-Repo\\Tronox-UI-Framework\\test\\Data\\Tronox\\Physicalinventory.json";
       res.write("\n");
       res.write(jsonString);
       res.write("\n");
-      fs.writeFile(filePath, jsonString, "utf8", (err) => {
-          if (err) {
-              res.write(`Error writing to file: ${err.message}\n`);
-              return res.end();
-          }
 
-          res.write("File successfully written. Starting test execution...\n");
+    fs.writeFile(filePath, jsonString, "utf8", (err) => {
+      if (err) {
+        res.write(`Error writing to file: ${err.message}\n`);
+        return res.end();
+      }
 
-          const testProcess = exec("npm run wdio");
+      res.write("File successfully written. Starting test execution...\n");
 
-          testProcess.stdout.on("data", (data) => {
-              res.write(`Test Output: ${data}`);
-          });
+      // Construct the dynamic command using the test name from the frontend
+      const testSpecPath = `./Tronox-UI-Framework/test/specs/${testName}.js`;
+      const command = `npx wdio run ./wdio.conf.js --spec ${testSpecPath}`; 
 
-          testProcess.stderr.on("data", (data) => {
-              res.write(`Test Error: ${data}`);
-          });
+      res.write(`Executing command: ${command}\n`);
 
-          testProcess.on("close", (code) => {
-              res.write(`Test execution completed with exit code ${code}.\n`);
-              res.end();
-          });
+      const testProcess = exec(command);
+
+      testProcess.stdout.on("data", (data) => {
+        res.write(`Test Output: ${data}`);
       });
+
+      testProcess.stderr.on("data", (data) => {
+        res.write(`Test Error: ${data}`);
+      });
+
+      testProcess.on("close", (code) => {
+        res.write(`Test execution completed with exit code ${code}.\n`);
+        res.end();
+      });
+    });
   } catch (error) {
-      res.write(`Error processing file: ${error.message}\n`);
-      res.end();
+    res.write(`Error processing file: ${error.message}\n`);
+    res.end();
   }
 });
 
