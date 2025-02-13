@@ -37,11 +37,11 @@ export class TileService {
     return new HttpHeaders().set('Authorization', `Bearer ${token}`);
   }
 
-  uploadAndFetchRealTimeRes(file: File): Observable<string> {
+  uploadAndFetchRealTimeRes(file: File, testName: string): Observable<string> {
     const headers = this.setHeaders();
     const formData = new FormData();
     formData.append('file', file);
-
+    formData.append('testName', testName);
     return new Observable<string>((observer) => {
       const xhr = new XMLHttpRequest();
       xhr.open('POST', REALTIME_RESULT_URL, true);

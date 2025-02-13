@@ -68,19 +68,21 @@ export class TileDialogBoxComponent {
     this.isProcessing = true;
     this.result = ''; // Clear previous results
 
-    this.tileService.uploadAndFetchRealTimeRes(this.file).subscribe({
-      next: (chunk) => {
-        this.result += chunk;
-      },
-      error: (error) => {
-        console.error('Error uploading file:', error);
-        this.isProcessing = false;
-      },
-      complete: () => {
-        console.log('File processing complete');
-        this.isProcessing = false;
-      },
-    });
+    this.tileService
+      .uploadAndFetchRealTimeRes(this.file, this.data?.tile?.appNamespec)
+      .subscribe({
+        next: (chunk) => {
+          this.result += chunk;
+        },
+        error: (error) => {
+          console.error('Error uploading file:', error);
+          this.isProcessing = false;
+        },
+        complete: () => {
+          console.log('File processing complete');
+          this.isProcessing = false;
+        },
+      });
   }
 
   openResultsDialog(result: any) {
