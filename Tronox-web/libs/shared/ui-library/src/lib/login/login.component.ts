@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
       next: (response) => {
         console.log(response.message);
         localStorage.setItem('token', response.token);
+        localStorage.setItem('tronox_username', this.username);
         this.router.navigate(['/tile']);
       },
       error: (err) => {
