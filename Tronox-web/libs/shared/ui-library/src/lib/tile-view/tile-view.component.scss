@@ -9,9 +9,32 @@
   box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.2);
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   cursor: pointer;
+  border-radius: 10%;
+  color: #0f216d;
+  background-color: #dbe0f5;
 }
 
 .tile-card:hover {
   transform: scale(1.05);
   box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.3);
+}
+
+.card-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.icon{
+  height: 50px;
+  width: 50px;
+}
+div.icon>.material-icons{
+  font-size: 30px;
+}
+
+:host ::ng-deep mat-icon{
+  height: 50px !important;
+  width: 50px !important;
 }

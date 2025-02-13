@@ -1,15 +1,19 @@
 <mat-dialog-content class="dialog-content">
-  <h2 mat-dialog-title class="dialog-title">Upload an Excel File</h2>
-
   <!-- File Upload + Buttons (Side by Side) -->
+ 
   <div class="input-actions-container">
+    <div>
+      <p mat-dialog-title class="dialog-title">
+        Upload an excel file for {{ this.data?.tile?.appName }}
+      </p>
+    </div>
     <input
       type="file"
       accept=".xls,.xlsx"
       (change)="onFileSelected($event)"
       class="file-input"
     />
-
+ 
     <button
       mat-button
       color="primary"
@@ -18,17 +22,16 @@
     >
       ▶ Run Script
     </button>
-
+ 
     <mat-spinner *ngIf="isProcessing" diameter="24"></mat-spinner>
-
+ 
     <button mat-button mat-dialog-close [disabled]="isProcessing">Close</button>
   </div>
-
-  <!-- Test Results Section -->
-  <h2 mat-dialog-title class="dialog-title">Test Results</h2>
-
+ 
+ 
   <!-- Scrollable Results Container -->
-  <div [class.terminal-look]="result.length" class="results-container">
+  <div [class.terminal-look]="result.length" #resultsContainer class="results-container">
     <pre>{{ result }}</pre>
   </div>
 </mat-dialog-content>
+ 

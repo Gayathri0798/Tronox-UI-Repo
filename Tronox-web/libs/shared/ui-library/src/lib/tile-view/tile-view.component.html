@@ -1,5 +1,11 @@
 <mat-card class="tile-card" (click)="openDialog(tile)">
   <mat-card-content>
-    {{ tile.appName }}
+    <div class="card-container">
+      <div class="icon"><mat-icon>play_circle_outline</mat-icon></div>
+      <div> {{ tile.appName }}</div>
+    </div>
+
+    
+   
   </mat-card-content>
 </mat-card>

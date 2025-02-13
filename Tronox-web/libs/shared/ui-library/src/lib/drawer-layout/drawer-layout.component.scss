@@ -18,6 +18,7 @@ body {
   height: 100vh;
   display: flex;
   flex-direction: column;
+  background-color: white;
 }
 
 .drawer-content {
@@ -40,13 +41,17 @@ body {
 }
 
 .left-drawer {
-  background-color: white !important;
+  background-color: rgb(198, 227, 253) !important;
   border: 0.1px solid rgb(218, 210, 210);
 }
 
 .right-drawer {
   background-color: white !important;
   border: 0.1px solid rgb(218, 210, 210);
+}
+
+.mat-drawer-inner-container{
+  background-color: aliceblue;
 }
 
 .grid-container {
@@ -67,7 +72,7 @@ body {
   justify-content: flex-start;
   padding: 12px 16px;
   font-size: 15px;
-  color: black;
+  color: #0f216d !important;
   background: transparent;
   border: none;
   outline: none;
@@ -79,7 +84,7 @@ body {
 
 .menu-item mat-icon {
   font-size: 22px;
-  color: black; /* Keep icon black */
+  color: #0f216d; /* Keep icon black */
   margin-right: 12px;
 }
 

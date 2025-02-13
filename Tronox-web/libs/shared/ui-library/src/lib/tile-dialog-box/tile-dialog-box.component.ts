@@ -1,4 +1,4 @@
-import { Component, inject, Inject } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, inject, Inject, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import {
@@ -32,7 +32,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
   templateUrl: './tile-dialog-box.component.html',
   styleUrl: './tile-dialog-box.component.scss',
 })
-export class TileDialogBoxComponent {
+export class TileDialogBoxComponent implements AfterViewChecked {
   constructor(
     public dialogRef: MatDialogRef<TileDialogBoxComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -46,6 +46,8 @@ export class TileDialogBoxComponent {
   file: File | undefined;
   result: any;
   private dialog = inject(MatDialog);
+  previousResultLength: any;
+  @ViewChild('resultsContainer') resultsContainer: ElementRef | undefined;
 
   onFileSelected(event: any): void {
     this.file = event.target.files[0];
@@ -96,5 +98,22 @@ export class TileDialogBoxComponent {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     URL.revokeObjectURL(this.fileUrl!);
     this.dialogRef.close();
+  }
+
+  scrollToBottom() {
+    if (this.resultsContainer) {
+      this.resultsContainer.nativeElement.scrollTop =
+        this.resultsContainer.nativeElement.scrollHeight;
+    }
+  }
+
+  ngAfterViewChecked() {
+    if (
+      this.resultsContainer &&
+      this.result.length > this.previousResultLength
+    ) {
+      this.scrollToBottom();
+    }
+    this.previousResultLength = this.result.length;
   }
 }
