@@ -10,7 +10,6 @@ import {
   MatDialogModule,
   MatDialogTitle,
   MatDialogContent,
-  MatDialogActions,
   MatDialogClose,
 } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -24,7 +23,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     CommonModule,
     MatDialogTitle,
     MatDialogContent,
-    MatDialogActions,
     MatDialogClose,
     MatButtonModule,
     MatDialogModule,
@@ -99,8 +97,4 @@ export class TileDialogBoxComponent {
     URL.revokeObjectURL(this.fileUrl!);
     this.dialogRef.close();
   }
-
-  // closeDialog(): void {
-  //   this.dialogRef.close();
-  // }
 }

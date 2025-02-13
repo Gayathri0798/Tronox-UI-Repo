@@ -5,6 +5,7 @@ import { ToolbarComponent } from '../toolbar/toolbar.component';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { TileLayoutComponent } from '../tile-layout/tile-layout.component';
 import { TileService } from '@tronox-web/util-library';
+import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'lib-drawer-layout',
   standalone: true,
@@ -13,6 +14,7 @@ import { TileService } from '@tronox-web/util-library';
     MatSidenavModule,
     ToolbarComponent,
     TileLayoutComponent,
+    MatIconModule,
   ],
   templateUrl: './drawer-layout.component.html',
   styleUrl: './drawer-layout.component.scss',
