@@ -1,7 +1,11 @@
-import { Component, Inject } from '@angular/core';
+import { Component, inject, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import {
+  MAT_DIALOG_DATA,
+  MatDialog,
+  MatDialogRef,
+} from '@angular/material/dialog';
 import {
   MatDialogModule,
   MatDialogTitle,
@@ -10,6 +14,8 @@ import {
   MatDialogClose,
 } from '@angular/material/dialog';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { TileService } from '@tronox-web/util-library';
+import { TestResultDialogComponent } from '../test-result-dialog/test-result-dialog.component';
 
 @Component({
   selector: 'lib-tile-dialog-box',
@@ -29,22 +35,25 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 export class TileDialogBoxComponent {
   constructor(
     public dialogRef: MatDialogRef<TileDialogBoxComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private readonly tileService: TileService
   ) {}
 
   fileName: string | null = null;
   fileUrl: string | null = null;
   fileUploaded = false;
   isProcessing = false;
+  file: File | undefined;
+  private dialog = inject(MatDialog);
 
   onFileSelected(event: any): void {
-    const file: File = event.target.files[0];
+    this.file = event.target.files[0];
 
-    if (file) {
-      this.fileName = file.name;
+    if (this.file) {
+      this.fileName = this.file.name;
 
       // Create a temporary URL for downloading
-      const objectUrl = URL.createObjectURL(file);
+      const objectUrl = URL.createObjectURL(this.file);
       this.fileUrl = objectUrl;
       this.fileUploaded = true;
     }
@@ -53,11 +62,31 @@ export class TileDialogBoxComponent {
   runScript(): void {
     this.isProcessing = true; // Show spinner
 
-    setTimeout(() => {
-      this.isProcessing = false; // Hide spinner after delay
-      console.log('Script executed successfully for:', this.fileName);
-      //alert(`Script executed successfully for ${this.fileName}`);
-    }, 3000); // Simulate 3s API call
+    if (this.file) {
+      this.tileService.uploadExcelToServer(this.file).subscribe({
+        next: (response) => {
+          console.log('File uploaded successfully:', response);
+          this.isProcessing = false;
+          this.closeDialog();
+          this.openResultsDialog(response);
+        },
+        error: (error) => {
+          console.error('Error uploading file:', error);
+          this.isProcessing = false;
+          this.closeDialog();
+          this.openResultsDialog(error);
+        },
+      });
+    }
+  }
+
+  openResultsDialog(result: any) {
+    this.dialog.open(TestResultDialogComponent, {
+      disableClose: true,
+      height: '800px',
+      width: '1200px',
+      data: result,
+    });
   }
 
   closeDialog(): void {

@@ -19,7 +19,7 @@ import { TileService } from '@tronox-web/util-library';
 })
 export class DrawerLayoutComponent implements OnInit {
   @Input() isDrawerOpen = true;
-  tiles: any;
+  tiles: any = [];
   cols: any = 3;
 
   constructor(
@@ -50,7 +50,9 @@ export class DrawerLayoutComponent implements OnInit {
   }
   ngOnInit(): void {
     this.tileService.getTiles().subscribe((tiles: any) => {
-      this.tiles = tiles;
+      Object.entries(tiles).forEach(([key, value]) => {
+        this.tiles.push(value);
+      });
       //console.log('Lav', tiles);
     });
   }

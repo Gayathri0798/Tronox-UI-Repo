@@ -1,0 +1,8 @@
+::ng-deep .mat-dialog-container {
+  height: 80vh; // Adjust height as needed
+}
+
+::ng-deep .mat-mdc-dialog-content {
+  max-height: 85vh; // Adjust height as needed
+  overflow: auto; // Ensure scroll if content overflows
+}

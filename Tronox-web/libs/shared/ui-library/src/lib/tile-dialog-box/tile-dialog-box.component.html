@@ -19,5 +19,5 @@
   </button>
 
   <mat-spinner *ngIf="isProcessing" diameter="24"></mat-spinner>
-  <button mat-button mat-dialog-close>Close</button>
+  <button mat-button mat-dialog-close [disabled]="isProcessing">Close</button>
 </mat-dialog-actions>
