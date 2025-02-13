@@ -8,13 +8,19 @@ import config from './config/app.config.js';
 import userConfig from './config/user.config.js';
 import multer from 'multer';
 import xlsx from 'xlsx';
-
+import path from "path";
+import { fileURLToPath } from "url";
 const app = express();
 const port = 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
+// Fix __dirname in ES Module
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
+// Serve static files from "public" folder
+app.use(express.static(path.join(__dirname, "public")));
 const upload = multer({ dest: 'uploads/' });
 
 function isEmptyObject(obj) {
@@ -150,7 +156,20 @@ app.post("/uploadnew", verifyToken, upload.single("file"), (req, res) => {
           console.error('Error writing to file:', err);
         } else {
           console.log('File successfully overwritten!');
-          runScript(req,res);
+          exec('npm run wdio', (error, stdout, stderr) => {
+            if (error) {
+              console.error(`exec error: ${error}`);
+              return res.status(500).send(`Test run failed: ${error.message}`);
+            }
+            
+            if (stderr) {
+              console.error(`stderr: ${stderr}`);
+              return res.status(500).send(`Test run failed with error: ${stderr}`);
+            }
+        
+            console.log(`stdout: ${stdout}`);
+            res.send(`Test run completed successfully: ${stdout}`);
+          });
         }
       });
       
@@ -161,6 +180,123 @@ app.post("/uploadnew", verifyToken, upload.single("file"), (req, res) => {
       res.status(500).json({ error: "Error processing file" });
   }
 });
+
+// app.get("/realtime", (req, res) => {
+//   res.setHeader("Content-Type", "text/plain");
+//   res.setHeader("Transfer-Encoding", "chunked");
+
+//   let count = 0;
+
+//   const sendData = () => {
+//       count++;
+//       res.write(`Message ${count}: This is update ${count}\n`);
+//       res.flush?.(); // Flush the response buffer if supported
+
+//       if (count === 5) {
+//           clearInterval(interval);
+//           res.write("Done!\n");
+//           res.end();
+//       }
+//   };
+
+//   sendData(); // Send first message immediately
+//   const interval = setInterval(sendData, 2000);
+// });
+
+app.post("/realtime-testcase-exec", verifyToken, upload.single("file"), (req, res) => {
+  res.setHeader("Content-Type", "text/plain");
+  res.setHeader("Transfer-Encoding", "chunked");
+
+  if (!req.file) {
+      res.write("Error: No file uploaded\n");
+      return res.end();
+  }
+
+  try {
+      res.write("Processing uploaded file...\n");
+
+      const workbook = xlsx.readFile(req.file.path);
+      const sheetName = workbook.SheetNames[0];
+      const sheet = workbook.Sheets[sheetName];
+      
+      const mergedCells = sheet["!merges"] || [];
+      res.write(`Found ${mergedCells.length} merged cells.\n`);
+
+      const jsonData = xlsx.utils.sheet_to_json(sheet, { header: 1, defval: null });
+      const result = {};
+      const processedColumns = new Set();
+
+      mergedCells.forEach((merge) => {
+          const parentCell = jsonData[merge.s.r][merge.s.c];
+          const childData = {};
+          var r = "";
+          for (let col = merge.s.c; col <= merge.e.c; col++) {
+              const key = jsonData[merge.s.r + 1]?.[col];
+              const value = jsonData[merge.s.r + 2]?.[col];
+              r= value;
+              if (key) {
+                  childData[key] = value !== undefined ? value : null;
+                  processedColumns.add(col);
+              }
+          }
+          if(isEmptyObject(childData)) {
+            result[parentCell] = r;
+        }
+        else {
+            result[parentCell] = childData;
+        }
+
+          //result[parentCell] = Object.keys(childData).length ? childData : null;
+      });
+
+      if (mergedCells.length === 0) {
+          const headers = jsonData[0] || [];
+          const values = jsonData[1] || [];
+          headers.forEach((header, index) => {
+              if (header && !processedColumns.has(index)) {
+                  result[header] = values[index] ?? null;
+              }
+          });
+      }
+
+      fs.unlinkSync(req.file.path);
+      res.write("File processing completed.\n");
+     
+      const jsonString = JSON.stringify(result, null, 2);
+     const filePath = 'C:\\Tronox-UI-Repo\\Tronox-UI-Framework\\test\\Data\\Tronox\\Physicalinventory.json';
+      //const filePath = "C:\\tronox\\Tronox-UI-Repo1\\Tronox-UI-Framework\\test\\Data\\Tronox\\Physicalinventory.json";
+      res.write("\n");
+      res.write(jsonString);
+      res.write("\n");
+      fs.writeFile(filePath, jsonString, "utf8", (err) => {
+          if (err) {
+              res.write(`Error writing to file: ${err.message}\n`);
+              return res.end();
+          }
+
+          res.write("File successfully written. Starting test execution...\n");
+
+          const testProcess = exec("npm run wdio");
+
+          testProcess.stdout.on("data", (data) => {
+              res.write(`Test Output: ${data}`);
+          });
+
+          testProcess.stderr.on("data", (data) => {
+              res.write(`Test Error: ${data}`);
+          });
+
+          testProcess.on("close", (code) => {
+              res.write(`Test execution completed with exit code ${code}.\n`);
+              res.end();
+          });
+      });
+  } catch (error) {
+      res.write(`Error processing file: ${error.message}\n`);
+      res.end();
+  }
+});
+
 
 // Start the server
 app.listen(port, () => {
