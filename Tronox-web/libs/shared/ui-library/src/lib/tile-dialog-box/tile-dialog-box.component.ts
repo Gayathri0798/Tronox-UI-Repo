@@ -16,6 +16,7 @@ import {
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TileService } from '@tronox-web/util-library';
 import { TestResultDialogComponent } from '../test-result-dialog/test-result-dialog.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'lib-tile-dialog-box',
@@ -28,6 +29,7 @@ import { TestResultDialogComponent } from '../test-result-dialog/test-result-dia
     MatButtonModule,
     MatDialogModule,
     MatProgressSpinnerModule,
+    MatFormFieldModule,
   ],
   templateUrl: './tile-dialog-box.component.html',
   styleUrl: './tile-dialog-box.component.scss',
@@ -44,6 +46,7 @@ export class TileDialogBoxComponent {
   fileUploaded = false;
   isProcessing = false;
   file: File | undefined;
+  result: any;
   private dialog = inject(MatDialog);
 
   onFileSelected(event: any): void {
@@ -60,24 +63,24 @@ export class TileDialogBoxComponent {
   }
 
   runScript(): void {
-    this.isProcessing = true; // Show spinner
+    if (!this.file) return;
 
-    if (this.file) {
-      this.tileService.uploadExcelToServer(this.file).subscribe({
-        next: (response) => {
-          console.log('File uploaded successfully:', response);
-          this.isProcessing = false;
-          this.closeDialog();
-          this.openResultsDialog(response);
-        },
-        error: (error) => {
-          console.error('Error uploading file:', error);
-          this.isProcessing = false;
-          this.closeDialog();
-          this.openResultsDialog(error);
-        },
-      });
-    }
+    this.isProcessing = true;
+    this.result = ''; // Clear previous results
+
+    this.tileService.uploadAndFetchRealTimeRes(this.file).subscribe({
+      next: (chunk) => {
+        this.result += chunk;
+      },
+      error: (error) => {
+        console.error('Error uploading file:', error);
+        this.isProcessing = false;
+      },
+      complete: () => {
+        console.log('File processing complete');
+        this.isProcessing = false;
+      },
+    });
   }
 
   openResultsDialog(result: any) {

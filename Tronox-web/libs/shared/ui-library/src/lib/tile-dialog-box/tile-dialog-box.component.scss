@@ -1,16 +1,58 @@
-.file-info {
-  margin-top: 10px;
+::ng-deep .mat-dialog-container {
+  width: 600px;
+  min-height: 400px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px !important;
+  border-radius: 12px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+  background-color: #ffffff;
 }
 
-a {
-  color: #1976d2;
-  text-decoration: none;
+.dialog-title {
+  font-size: 1.5rem;
   font-weight: bold;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.input-actions-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.file-input {
+  padding: 8px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background-color: #f9f9f9;
   cursor: pointer;
 }
 
-a:hover {
-  text-decoration: underline;
+.results-container {
+  width: 902px;
+  height: 360px;
+  overflow-y: auto;
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  font-size: 14px;
+  white-space: pre-wrap;
+}
+
+::ng-deep .mat-dialog-container {
+  height: 100vh;
+}
+
+::ng-deep .mat-mdc-dialog-content {
+  max-height: 100vh;
+  overflow: auto;
 }

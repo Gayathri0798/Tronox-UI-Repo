@@ -1,23 +1,34 @@
-<h2 mat-dialog-title>Upload an Excel File</h2>
-<mat-dialog-content>
-  <input type="file" accept=".xls,.xlsx" (change)="onFileSelected($event)" />
-  <div *ngIf="fileName" class="file-info">
-    <p><strong>File:</strong> {{ fileName }}</p>
-    <a *ngIf="fileUrl" [href]="fileUrl" download="{{ fileName }}"
-      >📥 Download</a
+<mat-dialog-content class="dialog-content">
+  <h2 mat-dialog-title class="dialog-title">Upload an Excel File</h2>
+
+  <!-- File Upload + Buttons (Side by Side) -->
+  <div class="input-actions-container">
+    <input
+      type="file"
+      accept=".xls,.xlsx"
+      (change)="onFileSelected($event)"
+      class="file-input"
+    />
+
+    <button
+      mat-button
+      color="primary"
+      (click)="runScript()"
+      [disabled]="!fileUploaded || isProcessing"
     >
+      ▶ Run Script
+    </button>
+
+    <mat-spinner *ngIf="isProcessing" diameter="24"></mat-spinner>
+
+    <button mat-button mat-dialog-close>Close</button>
+  </div>
+
+  <!-- Test Results Section -->
+  <h2 mat-dialog-title class="dialog-title">Test Results</h2>
+
+  <!-- Scrollable Results Container -->
+  <div class="results-container">
+    <pre>{{ result }}</pre>
   </div>
 </mat-dialog-content>
-<mat-dialog-actions align="end">
-  <button
-    mat-button
-    color="primary"
-    (click)="runScript()"
-    [disabled]="!fileUploaded || isProcessing"
-  >
-    ▶ Run Script
-  </button>
-
-  <mat-spinner *ngIf="isProcessing" diameter="24"></mat-spinner>
-  <button mat-button mat-dialog-close [disabled]="isProcessing">Close</button>
-</mat-dialog-actions>

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { GET_TILES, UPLOAD_EXCEL } from '../consts';
+import { GET_TILES, REALTIME_RESULT_URL, UPLOAD_EXCEL } from '../consts';
 
 @Injectable({
   providedIn: 'root',
@@ -35,5 +35,33 @@ export class TileService {
   setHeaders() {
     const token = localStorage.getItem('token');
     return new HttpHeaders().set('Authorization', `Bearer ${token}`);
+  }
+
+  uploadAndFetchRealTimeRes(file: File): Observable<string> {
+    const headers = this.setHeaders();
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return new Observable<string>((observer) => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('POST', REALTIME_RESULT_URL, true);
+
+      headers.keys().forEach((key) => {
+        const value = headers.get(key);
+        if (value) {
+          xhr.setRequestHeader(key, value);
+        }
+      });
+
+      xhr.onreadystatechange = () => {
+        if (xhr.readyState === 3) {
+          observer.next(xhr.responseText);
+        } else if (xhr.readyState === 4) {
+          observer.complete();
+        }
+      };
+
+      xhr.send(formData);
+    });
   }
 }
