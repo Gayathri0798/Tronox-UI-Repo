@@ -1,22 +1,29 @@
 {
-  "financeEnv": {
-    "baseUrl": "https://shriramsoftwares.com/chit_fund/index.php/login",
-    "appName": "chitfund",
-    "appNamespec": "login.e2e"
-  },
-  "Jamaica": {
-    "baseUrl": "https://flstg.discoverflow.lla.digital/jamaica",
-    "appName": "Jamaica",
-    "appNamespec": "Jamaica.e2e"
-  },
-  "Element": {
-    "baseUrl": "https://testautomationpractice.blogspot.com/",
-    "appName": "Element",
-    "appNamespec": "elements.e2e"
-  },
-  "Tronox": {
-    "baseUrl": "https://tronox.okta.com/",
-    "appName": "Tronox",
-    "appNamespec": "TronoxDTS.e2e"
-  }
+    "TronoxDTS": {
+        "baseUrl": "https://tronox.okta.com/",
+        "appName": "TronoxDTS",
+        "appNamespec": "TronoxDTS.e2e"
+    },
+    "Tronox_MTS": {
+        "baseUrl": "https://tronox.okta.com/",
+        "appName": "TronoxMTS",
+        "appNamespec": "Tronox_MTS.e2e"
+    },
+    "Tronox": {
+        "baseUrl": "https://tronox.okta.com/",
+        "appName": "TronoxDTS",
+        "appNamespec": "Tronox.e2e"
+    },
+    "TronoxFTM": {
+        "baseUrl": "https://tronox.okta.com/",
+        "appName": "TronoxFTM",
+        "appNamespec": "TronoxFTM.e2e"
+    },
+    "TronoxSTP": {
+        "baseUrl": "https://tronox.okta.com/",
+        "appName": "TronoxSTP",
+        "appNamespec": "TronoxSTP.e2e"
+    }
+
+    
 }
