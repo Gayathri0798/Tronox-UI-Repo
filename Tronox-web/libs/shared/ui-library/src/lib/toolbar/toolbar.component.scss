@@ -1,8 +1,9 @@
 mat-toolbar {
   background-color: rgb(252, 254, 255);
-  box-shadow: 0 0 0 0.5px black;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
   display: flex;
   align-items: center;
+  height: 80px !important;
 }
 .spacer {
   flex: 1;
@@ -14,14 +15,8 @@ mat-toolbar {
   width: 400px; /* Increased width */
 }
 
-.search-box .mat-mdc-text-field-wrapper {
-  height: 28px !important; /* Reduced height */
-  border-radius: 20px !important; /* Keeps edges rounded */
-}
-
-.search-box input {
-  padding: 2px 12px !important; /* Adjust padding for better alignment */
-  font-size: 14px; /* Optional: Adjust font size for better fit */
+.search-container {
+  display: flex;
 }
 
 mat-form-field {
@@ -31,7 +26,7 @@ mat-form-field {
 img {
   height: 82px;
   width: 176px;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 }
 
 // .spacer {
@@ -83,4 +78,49 @@ img {
   align-items: center;
   gap: 8px;
   font-size: 14px;
+}
+
+/* Container for search input and button */
+/* Container for search input and button */
+.search-container {
+  display: flex;
+  align-items: center;
+  width: 300px; /* Adjust the width as needed */
+  border: 1px solid #003366; /* Dark blue border color */
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #f9f9f9;
+}
+
+/* Style for the search input */
+.search-input {
+  border: none; /* Remove the border from the input */
+  outline: none;
+  flex: 1; /* Allow the input to take available space */
+  padding: 8px 12px;
+  font-size: 14px;
+  border-radius: 5px;
+  background-color: transparent;
+}
+
+/* Style for the search button */
+.search-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  margin-left: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+/* Search icon styling */
+.search-icon {
+  font-size: 18px; /* Icon size */
+  color: #333;
 }

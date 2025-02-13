@@ -21,14 +21,14 @@
 
     <mat-spinner *ngIf="isProcessing" diameter="24"></mat-spinner>
 
-    <button mat-button mat-dialog-close>Close</button>
+    <button mat-button mat-dialog-close [disabled]="isProcessing">Close</button>
   </div>
 
   <!-- Test Results Section -->
   <h2 mat-dialog-title class="dialog-title">Test Results</h2>
 
   <!-- Scrollable Results Container -->
-  <div class="results-container">
+  <div [class.terminal-look]="result.length" class="results-container">
     <pre>{{ result }}</pre>
   </div>
 </mat-dialog-content>

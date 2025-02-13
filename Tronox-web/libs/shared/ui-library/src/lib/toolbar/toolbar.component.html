@@ -1,15 +1,17 @@
 <mat-toolbar [class]="className">
   @if(showSearch){
   <ng-container>
-    <mat-form-field appearance="fill" class="search-box">
-      <mat-label>Search</mat-label>
+    <div class="search-container">
       <input
-        matInput
         type="text"
-        [(ngModel)]="searchQuery"
+        id="searchInput"
+        class="search-input"
         placeholder="Search..."
       />
-    </mat-form-field>
+      <button class="search-button">
+        <span class="search-icon"><mat-icon>search</mat-icon></span>
+      </button>
+    </div>
   </ng-container>
 
   <span class="spacer"></span>

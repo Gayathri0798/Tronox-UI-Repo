@@ -28,7 +28,6 @@ export class ToolbarComponent implements OnInit {
   @Input() imageSrc = '';
   @Input() searchQuery: any;
   userName: any;
-
   constructor(private authService: AuthService) {}
   ngOnInit(): void {
     this.userName = localStorage.getItem('tronox_username');
