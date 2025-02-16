@@ -3,7 +3,7 @@
   min-height: 400px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Start layout from the top */
+  justify-content: flex-start;
   align-items: center;
   padding: 20px !important;
   border-radius: 12px;
@@ -13,24 +13,24 @@
 }
 
 .dialog-logo {
-  width: 100%; /* Ensure logo container takes full width */
+  width: 100%;
   display: flex;
-  justify-content: center; /* Center the logo horizontally */
-  margin-bottom: 15px; /* Add minimal margin below logo */
+  justify-content: center;
+  margin-bottom: 15px;
 }
 
 .dialog-logo img {
-  width: 130px; /* Adjust the width of the logo to be smaller but elegant */
-  height: auto; /* Maintain aspect ratio */
-  object-fit: contain; /* Ensure logo maintains its aspect ratio */
-  max-height: 80px; /* Restrict max height to maintain a clean look */
+  width: 130px;
+  height: auto;
+  object-fit: contain;
+  max-height: 80px;
 }
 
 .dialog-title {
   font-size: 1rem;
   font-weight: bold;
   text-align: center;
-  margin-bottom: 10px; /* Slightly reduce margin to keep things tight */
+  margin-bottom: 10px;
 }
 
 .input-actions-container {
@@ -53,7 +53,7 @@
 }
 
 .results-container {
-  width: 902px;
+  width: 100%;
   height: 330px;
   overflow-y: auto;
   background: #f8f9fa;
@@ -117,4 +117,76 @@ mat-spinner {
 
 .file-input::file-selector-button:hover {
   background-color: #0056b3;
+}
+
+/* Table styles */
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+}
+
+.table th,
+.table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.table th {
+  background: #007bff;
+  color: white;
+  font-weight: bold;
+}
+
+.table tbody tr:nth-child(even) {
+  background: #f2f2f2;
+}
+
+.table tbody tr:hover {
+  background: #ddd;
+}
+
+.mat-table {
+  width: 100%;
+}
+
+.mat-header-row {
+  background-color: #007bff !important;
+  color: white;
+  font-weight: bold;
+}
+
+.mat-row:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.mat-row:hover {
+  background-color: #ddd;
+}
+
+/* Styles for test results status */
+.status-passed {
+  color: green;
+  font-weight: bold;
+}
+
+.status-failed {
+  color: red;
+  font-weight: bold;
+}
+
+/* No Results Styling */
+.no-results {
+  font-size: 14px;
+  font-weight: bold;
+  color: #666;
+  text-align: center;
+  margin-top: 10px;
 }

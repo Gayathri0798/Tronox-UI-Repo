@@ -10,10 +10,16 @@ import multer from "multer";
 import xlsx from "xlsx";
 import path from "path";
 import { fileURLToPath } from "url";
-import { Document, Packer, Paragraph, ImageRun } from "docx";
+import { Document, Packer, Paragraph, TextRun, ImageRun } from "docx";
 const app = express();
 const port = 3000;
-
+const DOCUMENTS_FOLDER = "./documents";
+const resultsFilePath = "testResults.json";
+if (!fs.existsSync(DOCUMENTS_FOLDER)) {
+  fs.mkdirSync(DOCUMENTS_FOLDER);
+}
+// Serve documents folder for downloads
+app.use("/documents", express.static(DOCUMENTS_FOLDER));
 app.use(cors());
 app.use(bodyParser.json());
 // Fix __dirname in ES Module
@@ -95,9 +101,16 @@ app.get("/api/tiles", verifyToken, (req, res) => {
   }
 });
 
-app.post("/uploadnew", verifyToken, upload.single("file"), (req, res) => {
+app.post("/testcase-exec", verifyToken, upload.single("file"), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: "No file uploaded" });
+  }
+
+  const { testName } = req.body; // Get the test name from the frontend
+
+  if (!testName) {
+    res.write("Error: No test name provided\n");
+    return res.end();
   }
 
   try {
@@ -158,14 +171,15 @@ app.post("/uploadnew", verifyToken, upload.single("file"), (req, res) => {
     // Cleanup uploaded file
     fs.unlinkSync(req.file.path);
     const jsonString = JSON.stringify(result, null, 2);
-    const path =
-      "C:\\Tronox-UI-Repo\\Tronox-UI-Framework\\test\\Data\\Tronox\\Physicalinventory.json";
+    const path = "./test/Data/Tronox/Physicalinventory.json";
     fs.writeFile(path, jsonString, "utf8", (err) => {
       if (err) {
         console.error("Error writing to file:", err);
       } else {
         console.log("File successfully overwritten!");
-        exec("npm run wdio", (error, stdout, stderr) => {
+        const testSpecPath = `./test/specs/${testName}.js`;
+        const command = `npx wdio run ./wdio.conf.js --spec ${testSpecPath}`;
+        exec(command, (error, stdout, stderr) => {
           if (error) {
             console.error(`exec error: ${error}`);
             return res.status(500).send(`Test run failed: ${error.message}`);
@@ -325,70 +339,54 @@ app.post(
   }
 );
 
-const IMAGE_FOLDER = path.join(__dirname, "screenshots");
-const SAVE_FOLDER = path.join(__dirname, "generated-docs");
+app.post("/testcase-results", verifyToken, async (req, res) => {
+  const rawData = fs.readFileSync(resultsFilePath, "utf-8");
+  const testResults = JSON.parse(rawData);
 
-// Ensure directories exist
-if (!fs.existsSync(SAVE_FOLDER)) {
-  fs.mkdirSync(SAVE_FOLDER, { recursive: true });
-}
+  const updatedResults = await Promise.all(
+    testResults.map(async (test) => {
+      const docFileName = `${test.Testname.replace(/\s+/g, "_")}.docx`;
+      const docFilePath = path.join(DOCUMENTS_FOLDER, docFileName);
+      const docDownloadURL = `http://localhost:${port}/documents/${docFileName}`;
 
-app.get("/generate-word", verifyToken, async (req, res) => {
-  try {
-    const imageFiles = fs
-      .readdirSync(IMAGE_FOLDER)
-      .filter((file) => /\.(png|jpe?g)$/i.test(file));
+      // Create Word Document
+      const doc = new Document({
+        sections: [
+          {
+            properties: {},
+            children: [
+              new Paragraph({
+                text: test.Testname,
+                heading: "Heading1",
+              }),
+              ...test.screenshots.map((screenshot) =>
+                fs.existsSync(screenshot)
+                  ? new Paragraph({
+                      children: [
+                        new ImageRun({
+                          data: fs.readFileSync(screenshot),
+                          transformation: { width: 500, height: 300 },
+                        }),
+                        new TextRun("\n"),
+                      ],
+                    })
+                  : new Paragraph(`Image not found: ${screenshot}`)
+              ),
+            ],
+          },
+        ],
+      });
 
-    if (imageFiles.length === 0) {
-      console.log("❌ No images found in the directory.");
-      return res.status(400).send("No images found in the directory.");
-    }
+      // Save the document
+      const buffer = await Packer.toBuffer(doc);
+      fs.writeFileSync(docFilePath, buffer);
 
-    console.log(
-      `📸 Found ${imageFiles.length} images, generating Word document...`
-    );
+      // Add document URL to test result
+      return { ...test, documentUrl: docDownloadURL };
+    })
+  );
 
-    const doc = new Document({
-      sections: [
-        {
-          children: imageFiles.map((file) => {
-            const imagePath = path.join(IMAGE_FOLDER, file);
-            const imageBuffer = fs.readFileSync(imagePath);
-
-            return new Paragraph({
-              children: [
-                new ImageRun({
-                  data: imageBuffer,
-                  transformation: { width: 500, height: 300 },
-                }),
-              ],
-            });
-          }),
-        },
-      ],
-    });
-
-    const buffer = await Packer.toBuffer(doc);
-    const fileName = `Screenshots_${Date.now()}.docx`;
-    const filePath = path.join(SAVE_FOLDER, fileName);
-
-    // Save file correctly
-    fs.writeFileSync(filePath, buffer);
-    console.log(`✅ Word file saved at: ${filePath}`);
-
-    // Send file for download
-    res.download(filePath, fileName, (err) => {
-      if (err) {
-        console.error("❌ Error sending file:", err);
-        res.status(500).send("Error sending file.");
-      } else {
-        console.log("📥 File sent for download!");
-      }
-    });
-  } catch (error) {
-    console.error("❌ Error generating Word file:", error);
-    res.status(500).send("Internal Server Error");
-  }
+  res.json(updatedResults);
 });
 
 // Start the server

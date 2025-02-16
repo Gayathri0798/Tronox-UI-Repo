@@ -5,6 +5,7 @@ import {
   GET_TILES,
   GET_WORD_DOC,
   REALTIME_RESULT_URL,
+  TEST_RESULTS,
   UPLOAD_EXCEL,
 } from '../consts';
 
@@ -73,5 +74,10 @@ export class TileService {
   getWordDocResult() {
     const headers = this.setHeaders();
     return this.http.get(GET_WORD_DOC, { headers, responseType: 'blob' });
+  }
+
+  getTestCaseResults(): Observable<any[]> {
+    const headers = this.setHeaders();
+    return this.http.post<any[]>(TEST_RESULTS, {}, { headers });
   }
 }
