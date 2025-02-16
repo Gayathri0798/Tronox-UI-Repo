@@ -17,8 +17,8 @@ export class TileViewComponent {
   openDialog(tile: any): void {
     this.dialog.open(TileDialogBoxComponent, {
       disableClose: true,
-      width: '1000px',
-      height: '500px',
+      width: '650px',
+      height: '300px',
       data: { tile },
     });
   }

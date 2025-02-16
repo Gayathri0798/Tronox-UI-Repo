@@ -1,0 +1,18 @@
+[
+  {
+    "Testname": "Should Create Maintenance Notification and Order",
+    "status": "passed",
+    "screenshots": [
+      "./screenshots/screenshot_login_success_1739704801599.png",
+      "./screenshots/screenshot_dashboard_clicked_1739704816056.png",
+      "./screenshots/screenshot_new_window_opened_1739704842883.png",
+      "./screenshots/screenshot_Enter_notification_1739704856899.png",
+      "./screenshots/screenshot_Enter_notification_description_1739704862421.png",
+      "./screenshots/screenshot_select_priority_1739704875139.png",
+      "./screenshots/screenshot_Enter_equipment_1739704892264.png",
+      "./screenshots/screenshot_save_the_document_1739704913247.png",
+      "./screenshots/screenshot_confirm_cost_calculation_1739704990748.png"
+    ],
+    "error": null
+  }
+]

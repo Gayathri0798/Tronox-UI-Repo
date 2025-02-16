@@ -26,6 +26,7 @@
     "@google/generative-ai": "^0.9.0",
     "@wdio/devtools-service": "^8.40.2",
     "cors": "^2.8.5",
+    "docx": "^9.1.1",
     "dotenv": "^16.4.5",
     "express": "^4.21.2",
     "konfig": "^0.2.1",

@@ -4,7 +4,7 @@
     "Submitbuttonxpath": "//input[@id='okta-signin-submit']",
     "Codepathxpath": "//input[@name='answer']",
     "verifybuttonxpath": "//input[@value='Verify']",
-    "dashboardElement": "//section[@id='main-content']/child::section/section/descendant::section[37]",
+    "dashboardElement": "//section[@id='main-content']/child::section/section/descendant::section[35]",
     "selectdocumenttile": "//*[@id='dashboardGroups']/div/child::div/descendant::ul/descendant::div[111]/child::div/div",
     "iframexpath": "//iframe[@id='application-Shell-startGUI']",
     "plantxpath": "//input[@id='M0:46:::6:30']",

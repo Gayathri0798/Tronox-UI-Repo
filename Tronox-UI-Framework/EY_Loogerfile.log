@@ -2099,3 +2099,4 @@ For more info see https://w3c.github.io/webdriver/#dfn-switch-to-window
 29-01-25 13:09:09  info: Error: Can't call scrollIntoView on element with selector "//span[text()='P0121-202']" because element wasn't found
 30-01-25 17:00:20  error: waitUntil condition failed with the following reason: no such alert
   (Session info: MicrosoftEdge=132.0.2957.127)
+14-02-25 15:41:21  error: login.json: No such file or directory found at path C:/EY_UI_Framework_Final/test/Data/chitfund/login.json

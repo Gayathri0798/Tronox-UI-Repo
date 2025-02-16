@@ -1,7 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { GET_TILES, REALTIME_RESULT_URL, UPLOAD_EXCEL } from '../consts';
+import {
+  GET_TILES,
+  GET_WORD_DOC,
+  REALTIME_RESULT_URL,
+  UPLOAD_EXCEL,
+} from '../consts';
 
 @Injectable({
   providedIn: 'root',
@@ -63,5 +68,10 @@ export class TileService {
 
       xhr.send(formData);
     });
+  }
+
+  getWordDocResult() {
+    const headers = this.setHeaders();
+    return this.http.get(GET_WORD_DOC, { headers, responseType: 'blob' });
   }
 }

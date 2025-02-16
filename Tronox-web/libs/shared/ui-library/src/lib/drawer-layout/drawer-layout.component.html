@@ -4,14 +4,40 @@
     <lib-toolbar
       [className]="'left-drawer'"
       [imageSrc]="'assets/tronox_logo.png'"
-    ></lib-toolbar>
+    >
+    </lib-toolbar>
 
     <!-- Drawer Menu Items -->
     <div class="drawer-menu">
-      <button mat-button class="menu-item">
+      <!-- Menu item with submenu toggle -->
+      <button mat-button class="menu-item" (click)="toggleSubMenu()">
         <mat-icon>apps</mat-icon>
         <span>My Apps</span>
       </button>
+
+      <!-- Submenu under My Apps -->
+      <div *ngIf="isSubMenuOpen" class="submenu">
+        @for(tile of uniqueTiles; track tile.appNameSpec){
+        <button
+          mat-button
+          class="submenu-item"
+          (click)="updateTileView(tile.appName)"
+        >
+          <mat-icon>folder_open</mat-icon>
+          <span>{{ tile.appName }}</span>
+        </button>
+        }
+        <!-- <button mat-button class="submenu-item">
+          <mat-icon>folder_open</mat-icon>
+          <span>App 2</span>
+        </button>
+        <button mat-button class="submenu-item">
+          <mat-icon>folder_open</mat-icon>
+          <span>App 3</span>
+        </button> -->
+      </div>
+
+      <!-- Other main menu items -->
       <button mat-button class="menu-item">
         <mat-icon>dashboard</mat-icon>
         <span>Dashboard</span>
@@ -31,7 +57,11 @@
   <mat-drawer-content class="main-content">
     <lib-toolbar [className]="'right-drawer'" [showSearch]="true"></lib-toolbar>
     <div class="grid-container">
-      <lib-tile-layout [tiles]="tiles"></lib-tile-layout>
+      <lib-tile-layout
+        [selectedAppFromSubmenu]="selectedSubMenuApp"
+        [tiles]="tiles"
+        [tilesCopy]="tilesCopy"
+      ></lib-tile-layout>
     </div>
   </mat-drawer-content>
 </mat-drawer-container>

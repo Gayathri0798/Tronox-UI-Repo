@@ -23,7 +23,10 @@ export class DrawerLayoutComponent implements OnInit {
   @Input() isDrawerOpen = true;
   tiles: any = [];
   cols: any = 3;
-
+  isSubMenuOpen: any = {};
+  uniqueTiles: any = [];
+  selectedSubMenuApp: any;
+  tilesCopy: any;
   constructor(
     private readonly breakpointObserver: BreakpointObserver,
     private readonly tileService: TileService
@@ -55,7 +58,29 @@ export class DrawerLayoutComponent implements OnInit {
       Object.entries(tiles).forEach(([key, value]) => {
         this.tiles.push(value);
       });
-      //console.log('Lav', tiles);
+      this.getUniqueTiles(this.tiles);
+      this.tilesCopy = JSON.parse(JSON.stringify(this.tiles));
     });
+  }
+
+  toggleSubMenu(): void {
+    // Toggle the visibility of the submenu
+    this.isSubMenuOpen = !this.isSubMenuOpen;
+  }
+
+  getUniqueTiles(tiles: any) {
+    tiles.forEach((tile: any) => {
+      let found: any = this.uniqueTiles.find(
+        (ut: any) => ut?.appName == tile?.appName
+      );
+      if (!found) {
+        this.uniqueTiles.push(tile);
+      }
+      found = null;
+    });
+  }
+
+  updateTileView(appName: string) {
+    this.selectedSubMenuApp = appName;
   }
 }

@@ -1,10 +1,14 @@
 <mat-dialog-content class="dialog-content">
+  <!-- Logo at the top-center of the dialog -->
+  <div class="dialog-logo">
+    <img src="assets/tronox_logo.png" alt="Logo" />
+  </div>
+
   <!-- File Upload + Buttons (Side by Side) -->
- 
   <div class="input-actions-container">
     <div>
       <p mat-dialog-title class="dialog-title">
-        Upload an excel file for {{ this.data?.tile?.appName }}
+        Upload an excel file for {{ this.data?.tile?.appNamespec }}
       </p>
     </div>
     <input
@@ -13,7 +17,11 @@
       (change)="onFileSelected($event)"
       class="file-input"
     />
- 
+  </div>
+
+  <!-- Button container for Run Script, Download, and Close (Side by Side) -->
+  <div class="button-container">
+    <!-- Run Script Button -->
     <button
       mat-button
       color="primary"
@@ -22,16 +30,20 @@
     >
       ▶ Run Script
     </button>
- 
+
     <mat-spinner *ngIf="isProcessing" diameter="24"></mat-spinner>
- 
+
+    <!-- Download Button -->
+    <button
+      mat-button
+      color="primary"
+      (click)="downloadTemplate()"
+      [disabled]="!wordFileBlob"
+    >
+      <mat-icon>download</mat-icon> Download Result
+    </button>
+
+    <!-- Close Button -->
     <button mat-button mat-dialog-close [disabled]="isProcessing">Close</button>
   </div>
- 
- 
-  <!-- Scrollable Results Container -->
-  <div [class.terminal-look]="result.length" #resultsContainer class="results-container">
-    <pre>{{ result }}</pre>
-  </div>
 </mat-dialog-content>
- 

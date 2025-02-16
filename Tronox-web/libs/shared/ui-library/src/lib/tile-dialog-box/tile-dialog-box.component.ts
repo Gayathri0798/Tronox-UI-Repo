@@ -1,4 +1,11 @@
-import { AfterViewChecked, Component, ElementRef, inject, Inject, ViewChild } from '@angular/core';
+import {
+  AfterViewChecked,
+  Component,
+  ElementRef,
+  inject,
+  Inject,
+  ViewChild,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import {
@@ -16,7 +23,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TileService } from '@tronox-web/util-library';
 import { TestResultDialogComponent } from '../test-result-dialog/test-result-dialog.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-
+import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'lib-tile-dialog-box',
   imports: [
@@ -28,6 +35,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatDialogModule,
     MatProgressSpinnerModule,
     MatFormFieldModule,
+    MatIconModule,
   ],
   templateUrl: './tile-dialog-box.component.html',
   styleUrl: './tile-dialog-box.component.scss',
@@ -47,6 +55,7 @@ export class TileDialogBoxComponent implements AfterViewChecked {
   result: any;
   private dialog = inject(MatDialog);
   previousResultLength: any;
+  wordFileBlob: Blob | null = null; // Variable to store the file
   @ViewChild('resultsContainer') resultsContainer: ElementRef | undefined;
 
   onFileSelected(event: any): void {
@@ -59,6 +68,7 @@ export class TileDialogBoxComponent implements AfterViewChecked {
       const objectUrl = URL.createObjectURL(this.file);
       this.fileUrl = objectUrl;
       this.fileUploaded = true;
+      this.wordFileBlob = null;
     }
   }
 
@@ -66,6 +76,7 @@ export class TileDialogBoxComponent implements AfterViewChecked {
     if (!this.file) return;
 
     this.isProcessing = true;
+    this.wordFileBlob = null;
     this.result = ''; // Clear previous results
 
     this.tileService
@@ -79,8 +90,20 @@ export class TileDialogBoxComponent implements AfterViewChecked {
           this.isProcessing = false;
         },
         complete: () => {
-          console.log('File processing complete');
+          console.log('✅ File processing complete');
           this.isProcessing = false;
+
+          // Fetch the Word document result and store it
+          this.tileService.getWordDocResult().subscribe({
+            next: (blob: Blob) => {
+              console.log('📄 Word file received');
+              this.wordFileBlob = blob;
+            },
+            error: (err) => {
+              console.error('❌ Error fetching Word file:', err);
+              alert('Failed to fetch Word file.');
+            },
+          });
         },
       });
   }
@@ -92,6 +115,24 @@ export class TileDialogBoxComponent implements AfterViewChecked {
       width: '1200px',
       data: result,
     });
+  }
+
+  downloadTemplate(): void {
+    if (!this.wordFileBlob) {
+      alert('No file available for download. Please run the script first.');
+      return;
+    }
+
+    const a = document.createElement('a');
+    const objectUrl = URL.createObjectURL(this.wordFileBlob);
+    a.href = objectUrl;
+    a.download = `Screenshots_${Date.now()}.docx`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(objectUrl);
+
+    console.log('📥 Word file downloaded');
   }
 
   closeDialog(): void {

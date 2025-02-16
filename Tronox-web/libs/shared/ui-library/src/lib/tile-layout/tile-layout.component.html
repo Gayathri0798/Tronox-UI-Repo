@@ -1,6 +1,6 @@
 <mat-grid-list cols="3" rowHeight="170px" gutterSize="16px">
-  @for(tile of tiles; track tile.appName){
-  <mat-grid-tile class="tile">
+  @for(tile of tilesCopy; track tile.appNamespec ){
+  <mat-grid-tile class="tile" [ngClass]="{ 'fade-out': tile.hide }">
     <lib-tile-view [tile]="tile"> </lib-tile-view>
   </mat-grid-tile>
   }
