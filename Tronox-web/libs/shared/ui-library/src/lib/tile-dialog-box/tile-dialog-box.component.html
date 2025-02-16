@@ -32,14 +32,14 @@
 
     <mat-spinner *ngIf="isProcessing" diameter="24"></mat-spinner>
 
-    <button
+    <!-- <button
       mat-button
       color="primary"
       (click)="downloadTemplate()"
       [disabled]="!wordFileBlob"
     >
       <mat-icon>download</mat-icon> Download Result
-    </button>
+    </button> -->
 
     <button mat-button mat-dialog-close [disabled]="isProcessing">Close</button>
   </div>
